@@ -4,54 +4,44 @@
     <meta charset="UTF-8" />
     <title>3D Portfolio</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <style>
+        #mobileBtn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            padding: 10px 20px;
+            background-color: #00acee;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<a-scene>
 
-    <!-- Camera & Cursor (at desk height) -->
-    <a-entity
-            camera
-            position="0 1.2 2"
-            raycaster="objects: .clickable"
-            look-controls>
-        <a-cursor
-                fuse="true"
-                fuse-timeout="500"
-                color="#FF9500">
-        </a-cursor>
+<button id="mobileBtn">Open Portfolio</button>
+
+<a-scene>
+    <a-entity camera position="0 1.2 2" raycaster="objects: .clickable" look-controls>
+        <a-cursor fuse="true" fuse-timeout="1500" color="#FF9500"></a-cursor>
     </a-entity>
 
-    <!-- Floor -->
-    <a-plane
-            position="0 0 0"
-            rotation="-90 0 0"
-            width="10"
-            height="10"
-            color="#cccccc">
-    </a-plane>
+    <a-plane position="0 0 0" rotation="-90 0 0" width="10" height="10" color="#cccccc"></a-plane>
 
-    <!-- Walls -->
     <a-box position="0 2.5 -5" depth="0.1" height="5" width="10" color="#e0e0e0"></a-box>
     <a-box position="-5 2.5 0" rotation="0 90 0" depth="0.1" height="5" width="10" color="#e0e0e0"></a-box>
-    <a-box position="5 2.5 0" rotation="0 90 0" depth="0.1" height="5" width="10" color="#e0e0e0"></a-box>\
-    <!-- Roof -->
-    <a-box
-            position="0 5 -0"
-            rotation="0 0 0"
-            width="10"
-            height="0.1"
-            depth="10"
-            color="#aaaaaa">
-    </a-box>
+    <a-box position="5 2.5 0" rotation="0 90 0" depth="0.1" height="5" width="10" color="#e0e0e0"></a-box>
 
+    <a-box position="0 5 -0" rotation="0 0 0" width="10" height="0.1" depth="10" color="#aaaaaa"></a-box>
 
-    <!-- Desk -->
     <a-box position="0 0.75 -2" width="2" height="0.1" depth="1" color="#8B4513"></a-box>
     <a-box position="-0.9 0.375 -2" width="0.1" height="0.75" depth="1" color="#5E3A1B"></a-box>
     <a-box position="0.9 0.375 -2" width="0.1" height="0.75" depth="1" color="#5E3A1B"></a-box>
-
-    <!-- Fake Laptop -->
     <a-box position="0 0.82 -2" width="0.6" height="0.02" depth="0.4" color="#333"></a-box>
+
     <a-box
             id="screen"
             class="clickable"
@@ -60,7 +50,7 @@
             height="0.4"
             depth="0.02"
             color="#00acee">
-    </a-box> <!-- screen -->
+    </a-box>
 
     <a-text
             value="Adjust your cursor to the laptop to view my portfolio"
@@ -68,9 +58,9 @@
             align="center"
             width="4"
             color="#222"
-            font="kelsonsans"
-            >
+            font="kelsonsans">
     </a-text>
+
     <a-text
             value="Abdalla's Portfolio"
             position="0 3 -4.9"
@@ -79,14 +69,23 @@
             font="kelsonsans"
             color="#222">
     </a-text>
-
 </a-scene>
 
-<!-- JavaScript to open portfolio -->
 <script>
-    document.querySelector('#screen').addEventListener('click', function () {
+    const screen = document.querySelector('#screen');
+    const mobileBtn = document.getElementById('mobileBtn');
+
+    function openPortfolio() {
         window.open('https://abdallawebsite.netlify.app/', '_blank');
-    });
+    }
+
+    screen.addEventListener('click', openPortfolio);
+    screen.addEventListener('touchstart', openPortfolio);
+    mobileBtn.addEventListener('click', openPortfolio);
+
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        mobileBtn.style.display = 'block';
+    }
 </script>
 </body>
 </html>
