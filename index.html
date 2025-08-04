@@ -4,25 +4,8 @@
     <meta charset="UTF-8" />
     <title>3D Portfolio</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <style>
-        #mobileBtn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
-            padding: 10px 20px;
-            background-color: #00acee;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            display: none;
-        }
-    </style>
 </head>
 <body>
-
-<button id="mobileBtn">Open Portfolio</button>
 
 <a-scene>
     <a-entity camera position="0 1.2 2" raycaster="objects: .clickable" look-controls>
@@ -53,7 +36,7 @@
     </a-box>
 
     <a-text
-            value="Adjust your cursor to the laptop to view my portfolio"
+            value="Adjust your cursor or tap the laptop screen"
             position="0 3 -2.9"
             align="center"
             width="4"
@@ -73,7 +56,6 @@
 
 <script>
     const screen = document.querySelector('#screen');
-    const mobileBtn = document.getElementById('mobileBtn');
 
     function openPortfolio() {
         window.open('https://abdallawebsite.netlify.app/', '_blank');
@@ -81,11 +63,7 @@
 
     screen.addEventListener('click', openPortfolio);
     screen.addEventListener('touchstart', openPortfolio);
-    mobileBtn.addEventListener('click', openPortfolio);
-
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        mobileBtn.style.display = 'block';
-    }
 </script>
+
 </body>
 </html>
